@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles/main.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bungee+Spice&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk&display=swap"
+      rel="stylesheet"
+    />
+    <title>Book Search</title>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Book Search Options</h1>
+
+      <div class="card-container">
+        <div class="card" id="card1" onclick="showBestSellers()">
+          <h2>Best Sellers</h2>
+          <p>Find best seller books for a specific date and type.</p>
+          <form action="/bestSellerBooks" method="POST">
+            <div>
+              <label for="date">Date:</label>
+              <input type="date" id="date" name="date" />
+            </div>
+            <div>
+              <label for="type">Type:</label>
+              <select name="type" class="type"></select>
+            </div>
+            <button type="submit">Search</button>
+          </form>
+        </div>
+
+        <div class="card" id="card2" onclick="showBookReviews()">
+          <h2>Book Reviews</h2>
+          <p>Search for best books by author name.</p>
+          <form action="/authorReviews" method="POST">
+            <div>
+              <label for="author">Author Name:</label>
+              <input
+                type="text"
+                id="author"
+                name="author"
+                placeholder="Enter author name"
+              />
+            </div>
+            <button onclick="searchBookReviews()">Search</button>
+          </form>
+        </div>
+
+        <div class="card" id="card4" onclick="showBookReviews()">
+          <h2>Book Reviews</h2>
+          <p>Search for book reviews by book name.</p>
+          <form action="/bookReviews" method="POST">
+            <div>
+              <label for="book">Book Name:</label>
+              <input
+                type="text"
+                id="book"
+                name="book"
+                placeholder="Enter book name"
+              />
+            </div>
+            <button onclick="searchBookReviews()">Search</button>
+          </form>
+        </div>
+
+        <div class="card" id="card3" onclick="showTop5Books()">
+          <h2>Top 5 Books</h2>
+          <p>
+            Get the top 5 books regardless of their type for a specific date.
+          </p>
+          <form action="/top5" method="POST">
+            <div>
+              <label for="date">Date:</label>
+              <input type="date" id="date" name="date" />
+            </div>
+            <button onclick="getTop5Books()">Search</button>
+          </form>
+        </div>
+      </div>
+
+      <div class="result-container">
+        <% if (locals.books) { %>
+        <h2>Best sellers (<%= date %>)</h2>
+        <div class="inner-container">
+          <% books.forEach(book => { %>
+          <div class="result">
+            <div>
+              <h4><span>Rank: <%= book.rank %></span></h4>
+              <h4>Title: <%= book.title %></h4>
+              <h4>Author: <%= book.author %></h4>
+              <h4>Publisher: <%= book.publisher %></h4>
+              <p><%= book.description %></p>
+            </div>
+            <div>
+              <img src="<%= book.book_image %>" alt="" />
+            </div>
+          </div>
+          <% }); %> <% }else if(locals.reviews){%>
+          <h2>Best books by <%= auth %></h2>
+          <div class="inner-container">
+            <% reviews.forEach(review=>{%>
+            <div class="result-review">
+              <div>
+                <h4>Title: <%= review.book_title %></h4>
+                <h4>Author: <%= review.book_author%></h4>
+                <h4>
+                  Review url:
+                  <a href="<%=review.url%>" target="_blank">Click here</a>
+                </h4>
+              </div>
+            </div>
+            <% }) %>
+          </div>
+          <% }else if(locals.Breviews){%>
+          <h2>Review for <%=Book %></h2>
+          <div class="inner-container">
+            <div class="result-review">
+              <div>
+                <h4>Title: <%= Breviews[0].book_title %></h4>
+                <h4>Author: <%= Breviews[0].book_author%></h4>
+                <h4>
+                  Review url:
+                  <a href="<%=Breviews[0].url%>" target="_blank">Click here</a>
+                </h4>
+                <p><%= Breviews.summary %></p>
+              </div>
+            </div>
+          </div>
+          <%} else if(locals.List){%>
+          <h2>Top 5 books for you!</h2>
+          <div class="inner-container">
+            <% List.forEach(list=>{%>
+            <h2 class="top5">Type: <%= list.list_name%></h2>
+            <% list.books.forEach(book=>{%>
+            <div class="result">
+              <div>
+                <h4>Title: <%= book.title %></h4>
+                <h4>Author <%= book.author%></h4>
+                <p><%=book.description%></p>
+              </div>
+              <div>
+                <img src="<%= book.book_image %>" alt="" />
+              </div>
+            </div>
+            <% }) %> <% }) %>
+          </div>
+          <% } else{ %>
+          <p>Nothing entered ...</p>
+          <% } %>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      //bookTypes is an array that has data to be added into options in select tag
+      const bookTypes = [
+        "Combined Print and E-Book Fiction",
+        "Combined Print and E-Book Nonfiction",
+        "Hardcover Fiction",
+        "Hardcover Nonfiction",
+        "Trade Fiction Paperback",
+        "Paperback Nonfiction",
+        "Advice How-To and Miscellaneous",
+        "Childrens Middle Grade Hardcover",
+        "Picture Books",
+        "Series Books",
+        "Young Adult Hardcover",
+        "Audio Fiction",
+        "Audio Nonfiction",
+        "Business Books",
+        "Graphic Books and Manga",
+        "Mass Market Monthly",
+        "Middle Grade Paperback Monthly",
+        "Young Adult Paperback Monthly",
+      ];
+      //get the <select> from html
+      const selectTagCard1 = document.querySelector("#card1 .type");
+      //via forEach loop append each of the above array item as option into the selectTag
+      bookTypes.forEach((bookType) => {
+        // Create a new option element for card1
+        const optionCard1 = document.createElement("option");
+        optionCard1.value = bookType;
+        optionCard1.textContent = bookType;
+        selectTagCard1.appendChild(optionCard1);
+      });
+    </script>
+  </body>
+</html>

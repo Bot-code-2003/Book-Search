@@ -1,0 +1,159 @@
+body {
+  font-family: "Arial", sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #006992;
+  font-family: "Space Grotesk", sans-serif;
+}
+
+.container {
+  max-width: 95%;
+  margin: 50px auto;
+  text-align: center;
+}
+
+h1 {
+  font-size: 3rem;
+  font-family: "Bungee Spice", sans-serif;
+}
+
+.card-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  margin-top: 80px;
+}
+
+.card {
+  width: 300px;
+  /* height: 400px; */
+  background-color: #005373;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  margin-bottom: 40px;
+  cursor: pointer;
+  transition: transform 0.2s ease-in-out;
+}
+
+.card:hover {
+  transform: scale(1.05);
+  box-shadow: rgba(153, 153, 153, 0.2) 0px 54px 55px,
+    rgba(153, 153, 153, 0.2) 0px -12px 30px,
+    rgba(153, 153, 153, 0.2) 0px 4px 6px, rgba(153, 153, 153, 0.2) 0px 12px 13px,
+    rgba(153, 153, 153, 0.2) 0px -3px 5px;
+}
+
+h2 {
+  color: #dc4218;
+}
+
+label {
+  font-weight: bold;
+  color: #eae7dc;
+}
+
+.result p {
+  color: black;
+}
+
+h4 {
+  /* font-weight: bold; */
+  color: black;
+}
+
+p {
+  color: #b1b1b1;
+  margin-top: 10px;
+}
+
+form {
+  gap: 5px;
+  margin-top: 40px;
+  display: flex;
+  flex-direction: column;
+  /* width: 60%; */
+  align-items: center;
+}
+
+.result-container {
+  border-radius: 5px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  background-color: #005373;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+span {
+  color: #ab2500;
+}
+
+.inner-container {
+  padding: 20px 0px;
+  border-radius: 5px;
+  text-align: center;
+  margin-top: 20px;
+  background-color: rgba(255, 255, 255, 0);
+  width: 90%;
+  height: 100%;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.top5 {
+  width: 800px;
+}
+
+.result {
+  width: 900px;
+  border-radius: 5px;
+  background-color: rgb(224, 224, 224);
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.result-review {
+  width: 400px;
+  border-radius: 5px;
+  background-color: rgb(224, 224, 224);
+  align-items: center;
+}
+
+.result p {
+  width: 600px;
+}
+
+.result img {
+  height: 150px;
+  width: 120px;
+  border-radius: 5px;
+}
+
+select,
+input,
+button {
+  width: 180px;
+  background-color: #eae7dc;
+  padding: 10px;
+  border-radius: 3px;
+  outline: none;
+  border: none;
+  cursor: pointer;
+}
+.type {
+  width: 200px;
+}
+
+button {
+  border: 1px solid rgb(156, 156, 156);
+  width: 80px;
+}
+
+button:hover {
+  background-color: #006992;
+}
