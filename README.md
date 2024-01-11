@@ -16,16 +16,16 @@ Before you begin, ensure you have the following installed on your machine:
    https://github.com/Bot-code-2003/Book-Search.git
    
 2. Navigate to project directory:
-   cd book-search
+   -cd book-search
 
 3. Install project dependencies using npm:
-   npm install
+   -npm install
 
 4. cd into index.js
-   cd index.js
+   -cd index.js
 
 5. Run the project:
-   node index.js
+   -node index.js
 
 6. Open your web browser and go to http://localhost:4000.
      
